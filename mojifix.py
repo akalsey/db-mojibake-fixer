@@ -4,18 +4,18 @@ import ftfy
 import argparse
 
 # Get environment variables for MariaDB connection
-MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
-MYSQL_USER = os.getenv('MYSQL_USER')
-MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
+DATABASE_NAME = os.getenv('DATABASE_NAME')
+DATABASE_USER = os.getenv('DATABASE_USER')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 
 def fix_encoding(table, column, primary):
     try:
         # Establish the database connection
         connection = mariadb.connect(
             host='localhost',
-            database=MYSQL_DATABASE,
-            user=MYSQL_USER,
-            password=MYSQL_PASSWORD
+            database=DATABASE_NAME,
+            user=DATABASE_USER,
+            password=DATABASE_PASSWORD
         )
 
         print(f"Connected to MariaDB database '{database}'.")
@@ -71,8 +71,8 @@ if __name__ == '__main__':
     column = args.column
     primary = args.primary
 
-    if not MYSQL_DATABASE or not MYSQL_USER or not MYSQL_PASSWORD:
-        print("Please set the MYSQL_DATABASE, MYSQL_USER, and MYSQL_PASSWORD environment variables.")
+    if not DATABASE_NAME or not DATABASE_USER or not DATABASE_PASSWORD:
+        print("Please set the DATABASE_NAME, DATABASE_USER, and DATABASE_PASSWORD environment variables.")
     else:
         # Call the function to fix encoding
         fix_encoding(table, column, primary)
